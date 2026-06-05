@@ -161,6 +161,14 @@ set_cct(5600, intensity_percent=1, gm_offset=0, settings=settings)
 
 Ray120c 的 `get_node_config` 显示 `advanced_hsi_support=false`。因此虽然 `set_hsi` 请求可以附带 `cct/gm` 字段，但 Ray120c 会忽略这些字段；CCT + G/M 请使用 `set_cct`。
 
+## 参考来源
+
+这个仓库的 Python 实现是独立写的，没有复制下面仓库的代码。调研和验证阶段参考过：
+
+- [theontho/amaran-cli](https://github.com/theontho/amaran-cli)：参考它对 Amaran Desktop 本地 WebSocket 控制面的整理，以及 Desktop WebSocket 接近 Sidus / Amaran OpenAPI 的判断。这个仓库帮助确认了 `set_cct`、`set_hsi`、`set_rgb` 等 action 的协议方向。
+- [wesbos/amaran-BLE-control](https://github.com/wesbos/amaran-BLE-control)：参考并测试了直接 BLE 控制路径，用来判断是否可以绕过 Desktop app。实测中 direct BLE 路径不适合作为本仓库的主路径，因为它没有在 Ray120c 上可靠覆盖扩展 CCT + G/M 控制。
+- Sidus / Amaran OpenAPI 文档：用于确认 OpenAPI v2 请求结构、AES-256-GCM token 格式、CCT/HSI/RGB 字段和数值范围。
+
 ## 测试
 
 ```bash

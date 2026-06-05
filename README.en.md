@@ -159,6 +159,14 @@ Validated on `amaran Ray 120c #1`:
 
 Ray120c `get_node_config` reports `advanced_hsi_support=false`. Although `set_hsi` can include `cct/gm` fields, this Ray120c ignores them; use `set_cct` for CCT + G/M control.
 
+## References
+
+The Python implementation in this repository was written independently; code was not copied from the repositories below. During research and validation, these sources were useful:
+
+- [theontho/amaran-cli](https://github.com/theontho/amaran-cli): referenced for its Amaran Desktop local WebSocket notes and its observation that the Desktop WebSocket API is close to the Sidus / Amaran OpenAPI. It helped confirm the protocol direction for actions such as `set_cct`, `set_hsi`, and `set_rgb`.
+- [wesbos/amaran-BLE-control](https://github.com/wesbos/amaran-BLE-control): referenced and tested as a direct BLE control path to evaluate whether the Desktop app could be bypassed. In this Ray120c validation, direct BLE was not selected as the main path because it did not reliably cover extended CCT + G/M control.
+- Sidus / Amaran OpenAPI documentation: used to confirm the OpenAPI v2 request shape, AES-256-GCM token format, CCT/HSI/RGB fields, and value ranges.
+
 ## Tests
 
 ```bash
